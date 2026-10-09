@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>كلان المرعب | HO Esports</title>
+<link rel="icon" href="logo.jpg">
+<link rel="preload" as="image" href="logo.jpg"><link rel="preload" as="image" href="template.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#ff2a1a;--gold:#d9ad6a}
+*{box-sizing:border-box}
+body{margin:0;color:#eee;font-family:Tahoma,Arial,sans-serif;min-height:100vh;background:#0a0505}
+header{text-align:center;padding:18px 10px 0}
+header img{width:170px;max-width:50vw;border-radius:18px;box-shadow:0 0 30px #ff2a1a66}
+header p{color:#c9a;margin:6px 0 0}
+nav{display:flex;gap:8px;justify-content:center;margin:14px}
+nav button{background:#1b0c0b;border:1px solid #6b1d15;color:#ddd;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:15px}
+nav button.on{background:var(--red);color:#fff;box-shadow:0 0 14px var(--red)}
+main{max-width:640px;margin:auto;padding:0 14px 40px}
+.box{background:#150a09ee;border:1px solid #7a2a20;border-radius:14px;padding:20px;box-shadow:0 0 24px #ff2a1a33 inset}
+label{display:block;margin:12px 0 5px;color:var(--gold);font-size:14px}
+input,select{width:100%;padding:11px;background:#0c0605;border:1px solid #6b1d15;border-radius:8px;color:#fff;font-size:15px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.row{grid-template-columns:1fr}}
+.btn{margin-top:18px;width:100%;padding:13px;background:linear-gradient(#ff3b2a,#a00f05);border:0;border-radius:10px;color:#fff;font-size:17px;font-weight:bold;cursor:pointer}
+.btn:disabled{opacity:.5}
+.msg{margin-top:12px;text-align:center;color:#8f8}.err{color:#ff7b6b}
+.acc{background:#0a3a1a;border:2px solid #3dff7a;border-radius:12px;padding:14px;text-align:center;margin-bottom:14px;line-height:2}
+.acc b{font-size:22px;color:#7dffa0;letter-spacing:1px;user-select:all}
+.page .nm.ok,.page .c.ok{color:#7dffa0}
+.hide{display:none!important}
+#mine{width:100%;border-radius:10px;margin-top:10px;max-height:240px;background:#000}
+/* صفحة الستريمر: نفس القالب الأحمر، وكل لاعب داخل إطار */
+.page{position:relative;width:100%;aspect-ratio:1086/1448;background:url(template.jpg) center/100% 100%;container-type:inline-size;border-radius:10px;overflow:hidden;box-shadow:0 0 30px #ff2a1a55}
+.page video{position:absolute;object-fit:cover;background:#000;cursor:pointer}
+.page .c,.page .nm{position:absolute;display:flex;align-items:center;cursor:pointer}
+.page .c{justify-content:center;font-size:3.4cqw;font-weight:bold;color:var(--gold)}
+.page .nm{font-size:2.3cqw;font-weight:bold;color:#fff;padding:0 2cqw;overflow:hidden;white-space:nowrap}
+.s{display:contents}
+.page .th{position:absolute;background:#000 center/cover;display:grid;place-items:center;cursor:pointer;font-size:5cqw;color:#fff;text-shadow:0 0 8px #000}
+.pg{display:flex;justify-content:space-between;align-items:center;margin:12px 0}
+.pg button{background:#1b0c0b;border:1px solid #6b1d15;color:#fff;padding:9px 18px;border-radius:8px;cursor:pointer}
+#modal{position:fixed;inset:0;background:#000d;display:grid;place-items:center;padding:14px;z-index:9}
+#modal .in{background:#150a09;border:2px solid var(--red);border-radius:14px;padding:14px;max-width:560px;width:100%}
+#modal video{width:100%;max-height:60vh;border-radius:8px;background:#000}
+.info span{display:inline-block;background:#2a0f0c;border-radius:6px;padding:2px 10px;margin:3px;font-size:14px}
+.del{background:#600;color:#fff;border:0;padding:8px 14px;border-radius:8px;margin-top:8px;cursor:pointer}
+</style>
+<style id="fx">
+:root{--pubg:#f2a900}
+body{font-family:'Tajawal','Rajdhani',Tahoma,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:-6%;z-index:-1;background:linear-gradient(#000b,#000e),url(template.jpg) center/cover;animation:kb 28s ease-in-out infinite alternate}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,#000c 100%),repeating-linear-gradient(#0000 0 3px,#0003 3px 4px)}
+header,nav,main,footer,.haz{position:relative;z-index:1}
+#fxc{position:fixed;inset:0;z-index:0;pointer-events:none}
+.chute{position:fixed;top:0;z-index:0;opacity:.5;pointer-events:none;animation:fall 24s linear infinite}
+/* هيدر */
+.lw{position:relative;display:inline-block;margin:14px 0 4px}
+.lw::before{content:"";position:absolute;inset:-34px;border-radius:50%;background:conic-gradient(#ff2a1a00 0 62%,#ff2a1aaa);-webkit-mask:radial-gradient(circle,#0000 61%,#000 62%);mask:radial-gradient(circle,#0000 61%,#000 62%);animation:spin 3.2s linear infinite}
+.lw::after{content:"";position:absolute;inset:-34px;border-radius:50%;border:2px solid #f2a90066;animation:zone 3s ease-out infinite}
+.lg{position:relative;overflow:hidden;border-radius:18px;display:block;animation:glow 2s ease-in-out infinite alternate,float 5s ease-in-out infinite}
+.lg img{display:block;width:170px;max-width:50vw;border-radius:0;box-shadow:none}
+.lg::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,#fff0,#fff9,#fff0);transform:skewX(-20deg);animation:shine 3.5s ease-in-out infinite}
+.tag{font-family:Rajdhani,sans-serif;letter-spacing:5px;color:var(--pubg);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px}
+.tag::before,.tag::after{content:"";width:40px;height:2px;background:linear-gradient(90deg,#0000,var(--pubg))}
+.tag::after{transform:scaleX(-1)}
+header p{font-weight:800;font-size:18px;background:linear-gradient(90deg,#8a6a35,#ffe9a8,#8a6a35);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 3s linear infinite}
+/* ستايل ببجي: كونتر + خطوط تحذير */
+nav button{clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);border:0;background:#2a0f0c;font-family:inherit;font-weight:800;transition:.25s}
+nav button.on{background:linear-gradient(#ff3b2a,#a00f05);box-shadow:none;filter:drop-shadow(0 0 8px var(--red))}
+nav button:hover{transform:translateY(-2px)}
+.haz{height:7px;max-width:640px;margin:0 auto 16px;background:repeating-linear-gradient(-45deg,var(--pubg) 0 10px,#111 10px 20px);opacity:.8;background-size:200% 100%;animation:haz 2s linear infinite}
+.box{position:relative}
+.box::before,.box::after{content:"";position:absolute;width:24px;height:24px;pointer-events:none}
+.box::before{top:7px;right:7px;border-top:3px solid var(--pubg);border-right:3px solid var(--pubg)}
+.box::after{bottom:7px;left:7px;border-bottom:3px solid var(--pubg);border-left:3px solid var(--pubg)}
+input,select{transition:.25s}
+input:focus,select:focus{outline:0;border-color:var(--pubg);box-shadow:0 0 0 2px #f2a90044,0 0 16px #ff2a1a66}
+.btn{position:relative;overflow:hidden;clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%);font-family:inherit;letter-spacing:1px;transition:.25s}
+.btn:hover{filter:brightness(1.2) drop-shadow(0 0 10px var(--red));transform:translateY(-2px)}
+.btn::after{content:"";position:absolute;top:0;left:-70%;width:40%;height:100%;background:linear-gradient(100deg,#fff0,#fff6,#fff0);transform:skewX(-20deg);animation:shine 3s infinite}
+footer{text-align:center;padding:10px 10px 30px;font-family:Rajdhani,sans-serif;letter-spacing:4px;color:#a88;font-size:13px}
+footer b{color:var(--gold);display:block;font-size:15px;margin-bottom:3px}
+/* قبول */
+.acc{animation:zoom .6s,pulse 2s 1s infinite}
+.wwcd{font-family:Rajdhani,sans-serif;font-weight:700;letter-spacing:3px;color:var(--pubg);font-size:20px;line-height:1.3;margin-bottom:6px;text-shadow:0 0 12px #f2a90099}
+/* لوحة المرعب */
+.page{animation:zoom .7s}
+.page::after{content:"";position:absolute;left:0;right:0;top:-20%;height:18%;background:linear-gradient(#ff2a1a00,#ff5a3a33,#ff2a1a00);pointer-events:none;animation:sweepY 4.5s linear infinite}
+.page.in .th,.page.in .c,.page.in .nm{animation:pop .55s cubic-bezier(.2,1.4,.4,1) both}
+.s:nth-child(1)>*{animation-delay:.05s!important}.s:nth-child(2)>*{animation-delay:.18s!important}.s:nth-child(3)>*{animation-delay:.31s!important}.s:nth-child(4)>*{animation-delay:.44s!important}.s:nth-child(5)>*{animation-delay:.57s!important}
+.page .th{transition:.25s}.page .th:hover{box-shadow:0 0 22px var(--pubg);filter:brightness(1.25)}
+.page .nm.ok,.page .c.ok{text-shadow:0 0 10px #3dff7a}
+#modal .in{animation:zoom .35s;position:relative}
+/* دخول الفورم */
+body.ready #v1>*,body.ready #login>*{animation:up .6s both;animation-delay:calc(var(--i,0)*70ms)}
+/* شاشة التحميل */
+#pre{position:fixed;inset:0;z-index:99;background:radial-gradient(ellipse at center,#3a0907,#000 70%);display:grid;place-content:center;justify-items:center;gap:20px;transition:opacity .7s}
+#pre.out{opacity:0;pointer-events:none}
+#pre img{width:230px;max-width:60vw;border-radius:18px;animation:zoom 1s both,glow 1.5s ease-in-out infinite alternate}
+.ldb{width:230px;height:5px;background:#2a0f0c;border-radius:3px;overflow:hidden}
+.ldb i{display:block;height:100%;background:linear-gradient(90deg,var(--red),var(--pubg));animation:load 1.3s ease-out forwards}
+#pre span{font-family:Rajdhani,sans-serif;letter-spacing:6px;color:var(--pubg);font-size:14px;animation:pulse 1s infinite}
+@keyframes kb{to{transform:scale(1.12) translate(-1.5%,-1%)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes zone{0%{transform:scale(1.25);opacity:.9}100%{transform:scale(.8);opacity:0}}
+@keyframes shine{0%,55%{left:-60%}100%{left:130%}}
+@keyframes glow{from{box-shadow:0 0 18px #ff2a1a66}to{box-shadow:0 0 44px #ffb040aa,0 0 80px #ff2a1a66}}
+@keyframes float{50%{transform:translateY(-6px)}}
+@keyframes shim{to{background-position:200% 0}}
+@keyframes haz{to{background-position:-40px 0}}
+@keyframes pulse{50%{opacity:.65;filter:brightness(1.3)}}
+@keyframes up{from{opacity:0;transform:translateY(22px)}}
+@keyframes zoom{from{opacity:0;transform:scale(.88)}}
+@keyframes pop{from{opacity:0;transform:scale(.4)}}
+@keyframes sweepY{to{top:110%}}
+@keyframes load{from{width:0}to{width:100%}}
+@keyframes fall{0%{transform:translate(0,-130px) rotate(-5deg)}50%{transform:translate(40px,55vh) rotate(5deg)}100%{transform:translate(-20px,112vh) rotate(-5deg)}}
+@media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important}}
+h1.gl{position:relative;margin:6px 0 0;font-size:40px;font-weight:800;color:var(--gold);text-shadow:0 0 18px #ff2a1a}
+.gl::before,.gl::after{content:attr(data-t);position:absolute;left:0;right:0;top:0;clip-path:inset(0 0 100% 0)}
+.gl::before{color:#ff2a1a;animation:gl1 3.5s infinite steps(1)}.gl::after{color:#39f;animation:gl2 3.5s infinite steps(1)}
+@keyframes gl1{93%{transform:translate(-5px);clip-path:inset(15% 0 55% 0)}96%{transform:translate(4px);clip-path:inset(60% 0 10% 0)}98%{clip-path:inset(0 0 100% 0)}}
+@keyframes gl2{94%{transform:translate(5px);clip-path:inset(45% 0 25% 0)}97%{transform:translate(-4px);clip-path:inset(5% 0 75% 0)}99%{clip-path:inset(0 0 100% 0)}}
+#hud{display:flex;align-items:center;gap:10px;margin-bottom:6px;font:700 13px Rajdhani,Tajawal,sans-serif;color:var(--pubg)}
+.hp{flex:1;height:10px;background:#2a0f0c;transform:skewX(-20deg);border:1px solid #6b1d15;overflow:hidden}
+.hp i{display:block;height:100%;width:0;background:var(--red);transition:.5s}
+#snd{position:fixed;bottom:12px;left:12px;z-index:60;background:#000a;border:1px solid var(--pubg);color:#fff;border-radius:50%;width:40px;height:40px;cursor:pointer}
+#cf{position:fixed;inset:0;z-index:97;pointer-events:none}
+#feed{position:fixed;top:12px;left:12px;z-index:98;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.kf{background:#000d;border-right:4px solid var(--pubg);padding:9px 16px;font-weight:800;font-size:14px;animation:kf .4s both}
+@keyframes kf{from{transform:translateX(-130%)}}
+.hm{position:fixed;width:28px;height:28px;margin:-14px;pointer-events:none;z-index:98;background:linear-gradient(45deg,#0000 44%,#fff 44% 56%,#0000 56%),linear-gradient(-45deg,#0000 44%,#fff 44% 56%,#0000 56%);animation:hm .4s forwards}
+@keyframes hm{to{transform:scale(1.9);opacity:0}}
+.flash{position:fixed;inset:0;background:#fff;z-index:100;pointer-events:none;animation:fl .6s forwards}
+@keyframes fl{to{opacity:0}}
+body.ready .lw{animation:slam .9s cubic-bezier(.2,1.6,.4,1)}
+@keyframes slam{from{transform:scale(2.8);opacity:0}}
+.stamp{position:absolute;top:34px;right:20px;border:4px solid #3dff7a;color:#3dff7a;font:700 30px Rajdhani,sans-serif;padding:2px 14px;letter-spacing:4px;transform:rotate(-12deg);animation:stamp .45s both;pointer-events:none;background:#000a;z-index:2}
+@keyframes stamp{0%{transform:scale(3) rotate(-18deg);opacity:0}60%{transform:scale(.9) rotate(-12deg);opacity:1}100%{transform:scale(1) rotate(-12deg)}}
+.box,.page{transition:transform .15s}
+</style>
+</head>
+<body>
+<div id="pre"><img src="logo.jpg" alt=""><div class="ldb"><i></i></div><span>LOADING...</span></div>
+<canvas id="fxc"></canvas>
+<svg width="0" height="0" style="position:absolute"><symbol id="ch" viewBox="0 0 46 72"><path d="M2 24C2 9 12 2 23 2s21 7 21 22c-4-4-8-4-11 0-3-4-8-4-10 0-3-4-7-4-10 0-3-4-7-4-11 0z" fill="#d9ad6a"/><path d="M2 24 19 56M23 24v32M44 24 27 56M12 24l9 32M34 24l-9 32" stroke="#d9ad6a" stroke-opacity=".7" fill="none"/><rect x="16" y="56" width="14" height="12" fill="#6b3b1a" stroke="#d9ad6a"/></symbol></svg>
+<svg class="chute" style="left:6%;animation-duration:26s" width="40"><use href="#ch"/></svg>
+<svg class="chute" style="left:46%;animation-duration:32s;animation-delay:-12s" width="30"><use href="#ch"/></svg>
+<svg class="chute" style="left:84%;animation-duration:22s;animation-delay:-6s" width="46"><use href="#ch"/></svg>
+<header><div class="lw"><div class="lg"><img src="logo.jpg" alt="HO Esports"></div></div><div class="tag">PUBG MOBILE • HO CLAN</div><h1 class="gl" data-t="كلان المرعب">كلان المرعب</h1><p>قدّم طلب انضمامك الحين</p></header>
+<nav><button id="t1" class="on">تقديم</button><button id="t2">لوحة المرعب</button></nav><div class="haz"></div>
+<main>
+<section id="v1" class="box">
+<div id="acc" class="acc hide"></div>
+<div id="hud"><span>جاهزية التقديم</span><div class="hp"><i id="hpi"></i></div><b id="hpv">0%</b></div>
+<div class="row">
+<div><label>الاسم</label><input id="name"></div>
+<div><label>الاسم داخل اللعبة</label><input id="ign"></div>
+</div>
+<div class="row">
+<div><label>الأيدي (ID)</label><input id="gid" inputmode="numeric"></div>
+<div><label>مركزك داخل التيم</label><select id="role"><option>سبورت</option><option>فراكر</option><option>IGL</option><option>فري مان</option></select></div>
+</div>
+<div class="row">
+<div><label>كم فريمات لعبك؟</label><select id="fps"><option>30</option><option>40</option><option>60</option><option>90</option><option>120</option></select></div>
+<div><label>نوع الجهاز</label><input id="device" placeholder="مثال: iPhone 13"></div>
+</div>
+<label>رابط فيديو لعبك</label><input id="link" type="url" dir="ltr" placeholder="https://..."><small style="color:#a88">يوتيوب، تيك توك، درايف، أو أي رابط يفتح</small>
+<button class="btn" id="send">إرسال التقديم</button>
+<div id="m" class="msg"></div>
+<div style="margin-top:14px;padding:12px;border:1px dashed #ff2a1a;border-radius:10px;background:#2a0f0c;color:#ffd9a0;text-align:center;line-height:1.9;font-size:14px">⚠️ <b>ملاحظة مهمة:</b> ما راح يوصلك إشعار بالقبول. ادخل على هذا الموقع بين فترة وفترة حتى تشوف إذا انقبلت (يطلع لك أيدي المرعب إذا انقبلت).<br>افتحه من <b>نفس المتصفح والجهاز</b> اللي قدّمت منه، ومنه تقدر تعدل تقديمك أيضاً.</div>
+</section>
+
+<section id="v2" class="hide">
+<div id="login" class="box" style="text-align:center">
+<label style="text-align:center">دخول الستريمر</label>
+<input id="pw" type="password" placeholder="كلمة السر" style="max-width:300px;margin:auto">
+<button class="btn" id="go" style="max-width:300px">دخول</button>
+<div id="lm" class="msg err"></div>
+</div>
+<div id="list" class="hide">
+<div class="pg"><button id="nx">التالي ›</button><b id="pi"></b><button id="pv">‹ السابق</button></div>
+<div class="page" id="page"></div>
+</div>
+</section>
+</main>
+<footer><b>HO ESPORTS</b>UNITY. SKILL. PRIDE.</footer>
+<button id="snd">🔊</button><canvas id="cf"></canvas><div id="feed"></div>
+<div id="modal" class="hide"><div class="in" id="mi"></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const F=["name","ign","gid","role","fps","device","link"];
+let tok=localStorage.tok;
+if(!tok){tok=[...crypto.getRandomValues(new Uint8Array(16))].map(b=>b.toString(16).padStart(2,"0")).join("");localStorage.tok=tok;}
+const API="https://script.google.com/macros/s/AKfycbzdbdDh5NdavwgDyISehMgGIyvq7Tr-ZGcZtytOiPap2dN-4sPtBjmJHLgj_mGx9ubmIw/exec";   // رابط الـ Web App (ينتهي بـ /exec)
+const api=b=>fetch(API,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify(b)}).then(r=>r.json());
+/* مؤثرات: صوت، كونفيتي، اهتزاز، هيت ماركر */
+const RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
+let snd=localStorage.snd!=="0",AC;
+const beep=(f,d=.08,t="square",v=.05,dl=0)=>{if(!snd)return;try{AC=AC||new(window.AudioContext||webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain(),T=AC.currentTime+dl;o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,T);g.gain.exponentialRampToValueAtTime(.001,T+d);o.connect(g);g.connect(AC.destination);o.start(T);o.stop(T+d);}catch(e){}};
+const fanfare=()=>[523,659,784,1046].forEach((f,i)=>beep(f,.2,"triangle",.08,i*.1));
+$("snd").textContent=snd?"🔊":"🔇";
+$("snd").onclick=e=>{e.stopPropagation();snd=!snd;localStorage.snd=snd?1:0;$("snd").textContent=snd?"🔊":"🔇";beep(700);};
+function toast(t){const d=document.createElement("div");d.className="kf";d.innerHTML=t;$("feed").appendChild(d);setTimeout(()=>d.remove(),3600);}
+function shake(){if(RM)return;document.querySelector("main").animate([{transform:"none"},{transform:"translate(-9px,4px)"},{transform:"translate(8px,-5px)"},{transform:"translate(-5px,3px)"},{transform:"none"}],{duration:400});}
+let CP=[],cfOn=0;
+function boom(n=120){if(RM)return;const c=$("cf"),x=c.getContext("2d");c.width=innerWidth;c.height=innerHeight;
+ for(let i=0;i<n;i++){const a=Math.random()*6.28,sp=Math.random()*10+3;CP.push({x:innerWidth/2,y:innerHeight/3,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-7,w:Math.random()*7+3,c:["#f2a900","#ff2a1a","#ffe9a8","#fff"][i%4],l:110+Math.random()*60,r:Math.random()*6});}
+ if(cfOn)return;cfOn=1;
+ (function f(){x.clearRect(0,0,c.width,c.height);CP=CP.filter(p=>p.l-->0);for(const p of CP){p.vy+=.28;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=.2;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.globalAlpha=Math.min(1,p.l/40);x.fillRect(-p.w/2,-p.w/4,p.w,p.w/2);x.restore();}
+  if(CP.length)requestAnimationFrame(f);else{cfOn=0;x.clearRect(0,0,c.width,c.height);}})();}
+function scramble(el,fin){let n=0;const iv=setInterval(()=>{el.textContent=[...fin].map((ch,i)=>i<n?ch:Math.floor(Math.random()*10)).join("");n+=.4;beep(300+Math.random()*500,.02,"square",.02);if(n>=fin.length){el.textContent=fin;clearInterval(iv);}},45);}
+function hud(){const ks=["name","ign","gid","device","link"],p=Math.round(ks.filter(k=>$(k).value.trim()).length/ks.length*100);$("hpi").style.width=p+"%";$("hpi").style.background=p<40?"#ff2a1a":p<100?"#f2a900":"#3dff7a";$("hpv").textContent=p+"%";}
+document.addEventListener("input",hud);hud();
+addEventListener("pointerdown",e=>{const h=document.createElement("div");h.className="hm";h.style.left=e.clientX+"px";h.style.top=e.clientY+"px";document.body.appendChild(h);setTimeout(()=>h.remove(),450);beep(e.target.closest("button")?880:440,.04,"square",.03);});
+document.querySelectorAll(".box,.page").forEach(el=>{el.addEventListener("pointermove",e=>{if(RM)return;const r=el.getBoundingClientRect(),dx=(e.clientX-r.left)/r.width-.5,dy=(e.clientY-r.top)/r.height-.5,k=el.classList.contains("page")?4:6;el.style.transform=`perspective(1000px) rotateY(${dx*k}deg) rotateX(${-dy*k}deg)`;});el.addEventListener("pointerleave",()=>el.style.transform="");});
+/* تحميل الصور وتثبيتها بالذاكرة + كاش */
+window.__keep=["logo.jpg","template.jpg"].map(s=>{const i=new Image();i.src=s;return i;});
+const ready=()=>{const fl=document.createElement("div");fl.className="flash";document.body.appendChild(fl);setTimeout(()=>fl.remove(),700);shake();document.querySelectorAll("#v1>*,#login>*").forEach((e,i)=>e.style.setProperty("--i",i));document.body.classList.add("ready");$("pre").classList.add("out");setTimeout(()=>$("pre").remove(),800);};
+Promise.all(window.__keep.map(i=>i.decode?i.decode().catch(()=>{}):0)).then(()=>setTimeout(ready,1300));
+setTimeout(()=>$("pre")&&ready(),6000);
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+/* جمرات متطايرة */
+if(!matchMedia("(prefers-reduced-motion:reduce)").matches)(()=>{const c=$("fxc"),x=c.getContext("2d");let w,h;const P=[];
+const rs=()=>{w=c.width=innerWidth;h=c.height=innerHeight};rs();addEventListener("resize",rs);
+const mk=i=>({x:Math.random()*w,y:i?Math.random()*h:h+10,r:Math.random()*2+.6,v:Math.random()*.8+.3,g:Math.random()<.5,a:Math.random()*6});
+for(let i=0;i<70;i++)P.push(mk(1));
+(function f(){x.clearRect(0,0,w,h);for(const p of P){p.y-=p.v;p.x+=Math.sin(p.a+=.02)*.4;if(p.y<-10)Object.assign(p,mk());x.globalAlpha=.4+.4*Math.sin(p.a*3);x.fillStyle=p.g?"#ffc861":"#ff3b1a";x.shadowColor=x.fillStyle;x.shadowBlur=8;x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fill();}requestAnimationFrame(f);})();})();
+const show=n=>{$("v1").classList.toggle("hide",n!=1);$("v2").classList.toggle("hide",n!=2);$("t1").classList.toggle("on",n==1);$("t2").classList.toggle("on",n==2);};
+$("t1").onclick=()=>show(1);$("t2").onclick=()=>show(2);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function fill(d,sid){
+  if(!d)return;
+  if(d.status==="accepted"&&sid){$("acc").innerHTML=`<div class="wwcd">WINNER WINNER<br>CHICKEN DINNER</div>🎉 مبروك، تم قبولك بالكلان!<br>ضيف المرعب بالأيدي:<br><b>${esc(sid)}</b>`;$("acc").classList.remove("hide");setTimeout(()=>{scramble($("acc").querySelector("b"),sid);fanfare();boom(120);},1900);}
+  F.forEach(k=>$(k).value=d[k]||"");$("send").textContent="تحديث تقديمك";hud();
+}
+api({action:"mine",token:tok}).then(r=>fill(r.row,r.streamerId)).catch(()=>{});
+
+$("send").onclick=async()=>{
+  const m=$("m");m.className="msg";
+  const d={};F.forEach(k=>d[k]=$(k).value.trim());
+  if(!d.name||!d.ign||!d.gid||!d.device||!d.link){m.className="msg err";m.textContent="عبّي كل الخانات";return;}
+  if(!/^https?:\/\/\S+$/i.test(d.link)){m.className="msg err";m.textContent="الرابط لازم يبدأ بـ https://";return;}
+  $("send").disabled=true;m.textContent="جاري الحفظ...";
+  try{
+    const r=await api({action:"save",token:tok,data:d});
+    if(r.error)throw Error("فشل الحفظ، تأكد من الرابط");
+    m.textContent="تم حفظ تقديمك. ما يوصلك إشعار بالقبول، فتفقّد الموقع بين فترة وفترة.";fanfare();boom(140);toast("✅ تم تسجيل تقديمك | SQUAD READY");$("send").textContent="تحديث تقديمك";
+  }catch(e){m.className="msg err";m.textContent=e.message;}
+  $("send").disabled=false;
+};
+
+/* لوحة الستريمر */
+let rows=[],pg=0,pw="";
+$("go").onclick=async()=>{
+  pw=$("pw").value;
+  let r;try{r=await api({action:"all",admin:pw});}catch(e){$("lm").textContent="ما كدرت أتصل بالسيرفر";return;}
+  if(r.error){$("lm").textContent="كلمة السر غلط";return;}
+  rows=r.rows.sort((a,b)=>a.ts-b.ts);$("login").classList.add("hide");$("list").classList.remove("hide");draw();toast("🔓 دخلت لوحة المرعب");
+};
+$("nx").onclick=()=>{if((pg+1)*5<rows.length){pg++;draw();}};
+$("pv").onclick=()=>{if(pg>0){pg--;draw();}};
+const yt=u=>(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([\w-]{11})/.exec(u)||[])[1];
+const thumb=u=>yt(u)?`;background-image:url(https://img.youtube.com/vi/${yt(u)}/hqdefault.jpg)`:"";
+const media=u=>yt(u)?`<iframe src="https://www.youtube.com/embed/${yt(u)}" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:8px"></iframe>`
+ :`<a class="del" style="display:block;text-align:center;text-decoration:none;background:var(--red);padding:16px" href="${esc(u)}" target="_blank" rel="noopener noreferrer">▶ فتح فيديو اللاعب</a>`;
+const W=1086,Hh=1448,OFF=[[0,0],[490,0],[0,250],[490,250],[255,472]];
+function draw(){const pe=$("page");pe.classList.remove("in");void pe.offsetWidth;pe.classList.add("in");
+  $("pi").textContent=`صفحة ${pg+1} / ${Math.max(1,Math.ceil(rows.length/5))} — ${rows.length} لاعب`;
+  $("page").innerHTML=rows.slice(pg*5,pg*5+5).map((d,i)=>{
+    const n=pg*5+i,[dx,dy]=OFF[i];
+    const r=(x,y,w,h)=>`left:${(x+dx)/W*100}%;top:${(y+dy)/Hh*100}%;width:${w/W*100}%;height:${h/Hh*100}%`;
+    return `<div class="s" onclick="openP(${n})">
+    <div class="th" style="${r(100,648,390,118)}${thumb(d.link)}">▶</div>
+    <div class="c${d.status==="accepted"?" ok":""}" style="${r(108,768,64,64)}">${n+1}</div>
+    <div class="nm${d.status==="accepted"?" ok":""}" style="${r(184,786,296,28)}">${d.status==="accepted"?"✓ ":""}${esc(d.name)}</div></div>`;}).join("");
+}
+function openP(n){
+  const d=rows[n];$("modal").classList.remove("hide");
+  $("mi").innerHTML=`${d.status==="accepted"?'<div class="stamp">ACCEPTED</div>':""}${media(d.link)}
+  <h3 style="color:var(--gold);margin:10px 0 4px">${esc(d.name)} — ${esc(d.ign)}</h3>
+  <div class="info"><span>ID: ${esc(d.gid)}</span><span>${esc(d.role)}</span><span>${esc(d.fps)} FPS</span><span>${esc(d.device)}</span></div>
+  <button class="del" style="background:#0a6b2a" onclick="acc('${esc(d.id)}',${d.status==="accepted"?0:1})">${d.status==="accepted"?"إلغاء القبول":"✅ قبول"}</button>
+  <button class="del" onclick="delP('${esc(d.id)}')">حذف</button>
+  <button class="del" style="background:#333" onclick="closeM()">إغلاق</button>`;
+}
+async function acc(id,v){
+  await api({action:"accept",admin:pw,id,value:v});
+  const n=rows.findIndex(r=>r.id===id);rows[n].status=v?"accepted":"";draw();openP(n);if(v){fanfare();boom(110);shake();toast("✅ تم قبول "+esc(rows[n].name));}
+}
+function closeM(){$("modal").classList.add("hide");$("mi").innerHTML="";}
+async function delP(id){
+  if(!confirm("متأكد تحذف هذا التقديم؟"))return;
+  await api({action:"delete",admin:pw,id});
+  rows=rows.filter(r=>r.id!==id);if(pg*5>=rows.length&&pg>0)pg--;closeM();draw();
+}
+$("modal").onclick=e=>{if(e.target.id==="modal")closeM();};
+</script>
+</body>
+</html>
